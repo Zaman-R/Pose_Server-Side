@@ -86,8 +86,12 @@ async function run() {
       res.send(result);
   })
 
+
+
+
+
    // get user data from database
-   app.get('/user', async(req, res)=>{ // getting all data from database
+   app.get('/user', async(req, res)=>{ 
     const cursor = userCollection.find();
     const result = await cursor.toArray();
     res.send(result);
@@ -108,14 +112,14 @@ app.get('/user/:email', async(req, res)=>{
 })
 
 
-app.put('/user/:email', async(req, res)=>{ // updating data into database
+app.put('/user/:email', async(req, res)=>{ 
     const email = req.params.email;
     const filter = {email: email};
     const options = {upsert : true};
     const updateUser = req.body;
     const user ={
         $set: {
-            myCart : updateUser.myCart, 
+            cart : updateUser.cart, 
         }
     }
     const result = await userCollection.updateOne(filter, user, options);
